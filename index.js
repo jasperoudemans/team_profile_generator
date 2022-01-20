@@ -27,11 +27,6 @@ const engineer_questions = [
     message: "Enter engineer GitHub username..",
     name: "engineer_github",
   },
-  {
-    type: "confirm",
-    message: "Would you like to add another team member?",
-    name: "wish_to_continue",
-  },
 ];
 
 const intern_questions = [
@@ -54,11 +49,6 @@ const intern_questions = [
     type: "input",
     message: "Enter intern school",
     name: "intern_school",
-  },
-  {
-    type: "confirm",
-    message: "Would you like to add another team member?",
-    name: "wish_to_continue",
   },
 ];
 
@@ -93,11 +83,6 @@ const init = async () => {
       message: "Team manager's office number..",
       name: "managerOffice",
     },
-    {
-      type: "confirm",
-      message: "Would you like to add another team member?",
-      name: "wish_to_continue",
-    },
   ]);
 
   team.manager = {
@@ -107,37 +92,30 @@ const init = async () => {
     office: firstAnswers.managerOffice,
   };
 
-  if (firstAnswers.wish_to_continue) {
-    while (true) {
-      const build_team_answer = await inquirer.prompt(menu);
-
-      if (build_team_answer.add_members === "Add an engineer") {
-        const create_engineer = await inquirer.prompt(engineer_questions);
-        team.engineers.push({
-          name: create_engineer.engineer_name,
-          id: create_engineer.engineer_ID,
-          email: create_engineer.engineer_email,
-          github: create_engineer.engineer_github,
-        });
-        if (!create_engineer.wish_to_continue) {
-          break;
-        }
-      } else if (build_team_answer.add_members === "Add an intern") {
-        const create_intern = await inquirer.prompt(intern_questions);
-        team.interns.push({
-          name: create_intern.intern_name,
-          id: create_intern.intern_ID,
-          email: create_intern.intern_email,
-          school: create_intern.intern_school,
-        });
-        if (!create_intern.wish_to_continue) {
-          break;
-        }
-      } else {
-        break;
-      }
+  while (true) {
+    const menu_answers = await inquirer.prompt(menu);
+    if (menu_answers.add_members === "Finish team") {
+      break;
     }
-    console.log(team);
+
+    if (menu_answers.add_members === "Add an engineer") {
+      const create_engineer = await inquirer.prompt(engineer_questions);
+      team.engineers.push({
+        name: create_engineer.engineer_name,
+        id: create_engineer.engineer_ID,
+        email: create_engineer.engineer_email,
+        github: create_engineer.engineer_github,
+      });
+    } else if (menu_answers.add_members === "Add an intern") {
+      const create_intern = await inquirer.prompt(intern_questions);
+      team.interns.push({
+        name: create_intern.intern_name,
+        id: create_intern.intern_ID,
+        email: create_intern.intern_email,
+        school: create_intern.intern_school,
+      });
+    }
   }
+  console.log(team);
 };
 init();
