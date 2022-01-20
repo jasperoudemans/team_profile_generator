@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+const fs = require("fs");
 
 const team = {
   manager: {},
@@ -60,6 +61,10 @@ const menu = [
     name: "add_members",
   },
 ];
+
+const generate = function () {
+  fs.writeFile("index.html", ``);
+};
 
 const init = async () => {
   const firstAnswers = await inquirer.prompt([
