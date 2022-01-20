@@ -1,4 +1,11 @@
 const inquirer = require("inquirer");
+
+const team = {
+  manager: {},
+  engineers: [],
+  interns: [],
+};
+
 const engineer_questions = [
   {
     type: "input",
@@ -8,6 +15,11 @@ const engineer_questions = [
   {
     type: "input",
     message: "Enter engineer ID..",
+    name: "engineer_ID",
+  },
+  {
+    type: "input",
+    message: "Enter engineer email..",
     name: "engineer_email",
   },
   {
@@ -31,7 +43,7 @@ const intern_questions = [
   {
     type: "input",
     message: "Enter intern ID",
-    name: "inter_ID",
+    name: "intern_ID",
   },
   {
     type: "input",
@@ -88,29 +100,44 @@ const init = async () => {
     },
   ]);
 
-  console.log(firstAnswers);
+  team.manager = {
+    name: firstAnswers.managerName,
+    id: firstAnswers.managerID,
+    email: firstAnswers.managerEmail,
+    office: firstAnswers.managerOffice,
+  };
 
   if (firstAnswers.wish_to_continue) {
     while (true) {
       const build_team_answer = await inquirer.prompt(menu);
 
-      console.log(build_team_answer);
       if (build_team_answer.add_members === "Add an engineer") {
         const create_engineer = await inquirer.prompt(engineer_questions);
-        console.log(create_engineer);
+        team.engineers.push({
+          name: create_engineer.engineer_name,
+          id: create_engineer.engineer_ID,
+          email: create_engineer.engineer_email,
+          github: create_engineer.engineer_github,
+        });
         if (!create_engineer.wish_to_continue) {
           break;
         }
       } else if (build_team_answer.add_members === "Add an intern") {
         const create_intern = await inquirer.prompt(intern_questions);
-        console.log(create_intern);
+        team.interns.push({
+          name: create_intern.intern_name,
+          id: create_intern.intern_ID,
+          email: create_intern.intern_email,
+          school: create_intern.intern_school,
+        });
         if (!create_intern.wish_to_continue) {
           break;
         }
       } else {
-        return;
+        break;
       }
     }
+    console.log(team);
   }
 };
 init();
