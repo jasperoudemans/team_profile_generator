@@ -14,6 +14,18 @@
       <div class="card">
         <h3>Manager</h3>
         <p>Name: ${team.manager.name}</p>
+        <p>ID: ${team.manager.id}</p>
+        <p>email: ${team.manager.email}</p>
+        <p>office: ${team.manager.office}</p>
+      </div>
+
+      ${for (let i = 0; i < team.engineers.length; i++) { return { name:
+      engineers[i].name, id: engineers[i].id, email: engineers[i].email, github:
+      engineers[i].github, }; }}
+
+      <div class="card">
+        <h3>Engineer</h3>
+        <p>Name: ${team.engineers.forEach(engineer => )}</p>
       </div>
     </section>
   </body>

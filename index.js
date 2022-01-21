@@ -62,6 +62,13 @@ const menu = [
   },
 ];
 
+const createEngineer = (engineer) => {
+  return `<div class="card">
+  <h3>Engineer</h3>
+  <p>Name: ${engineer.name}</p>
+</div>`;
+};
+
 const generate = function () {
   fs.writeFile(
     "index.html",
@@ -81,7 +88,12 @@ const generate = function () {
         <div class="card">
           <h3>Manager</h3>
           <p>Name: ${team.manager.name}</p>
+          <p>ID: ${team.manager.id}</p>
+          <p>email: ${team.manager.email}</p>
+          <p>office: ${team.manager.office}</p>
         </div>
+
+        ${team.engineers.map((engineer) => createEngineer(engineer)).join("")}
       </section>
     </body>
   </html>`,
@@ -150,3 +162,12 @@ const init = async () => {
   generate();
 };
 init();
+
+// for (let i = 0; i < team.engineers.length; i++) {
+//   return {
+//     name: engineers[i].name,
+//     id: engineers[i].id,
+//     email: engineers[i].email,
+//     github: engineers[i].github,
+//   };
+// }
