@@ -66,6 +66,19 @@ const createEngineer = (engineer) => {
   return `<div class="card">
   <h3>Engineer</h3>
   <p>Name: ${engineer.name}</p>
+  <p>ID: ${engineer.id}</p>
+  <p>Email: ${engineer.email}</p>
+  <p>GitHub: ${engineer.github}</p>
+</div>`;
+};
+
+const createIntern = (intern) => {
+  return `<div class="card">
+  <h3>Intern</h3>
+  <p>Name: ${intern.name}</p>
+  <p>ID: ${intern.id}</p>
+  <p>Email: ${intern.email}</p>
+  <p>School: ${intern.school}</p>
 </div>`;
 };
 
@@ -84,16 +97,19 @@ const generate = function () {
     <body>
       <h1>Our Team</h1>
   
-      <section id="team-members">
+      <section id="team-lead">
         <div class="card">
           <h3>Manager</h3>
           <p>Name: ${team.manager.name}</p>
           <p>ID: ${team.manager.id}</p>
-          <p>email: ${team.manager.email}</p>
-          <p>office: ${team.manager.office}</p>
+          <p>Email: ${team.manager.email}</p>
+          <p>Office: ${team.manager.office}</p>
         </div>
+        </section>
 
+        <section id="team-members">
         ${team.engineers.map((engineer) => createEngineer(engineer)).join("")}
+        ${team.interns.map((intern) => createIntern(intern)).join("")}
       </section>
     </body>
   </html>`,

@@ -7,6 +7,12 @@
   --red: rgb(219, 109, 109);
 }
 
+#team-lead {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 0.5rem;
+}
+
 #team-members {
   display: flex;
 }
