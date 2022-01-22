@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const createEngineer = require("./createEngineer.js");
 const createIntern = require("./createIntern.js");
+const createManager = require("./createManager.js");
 const {
   manager_questions,
   engineer_questions,
@@ -30,14 +31,9 @@ const generate = function () {
     <body>
       <h1>Our Team</h1>
   
-      <section id="team-lead">
-        <div class="card">
-          <h3>Manager</h3>
-          <p>Name: ${team.manager.name}</p>
-          <p>ID: ${team.manager.id}</p>
-          <p>Email: ${team.manager.email}</p>
-          <p>Office: ${team.manager.office}</p>
-        </div>
+        <section id="team-lead">
+          ${createManager(team.manager)}
+      
         </section>
 
         <section id="team-members">

@@ -1,4 +1,3 @@
-const { intern_questions } = require("./constants.js");
 const createIntern = require("./createIntern.js");
 
 it("Creates an intern with provided info", () => {
