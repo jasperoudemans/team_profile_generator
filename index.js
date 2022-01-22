@@ -1,66 +1,17 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
+const {
+  manager_questions,
+  engineer_questions,
+  intern_questions,
+  menu,
+} = require("./constants.js");
 
 const team = {
   manager: {},
   engineers: [],
   interns: [],
 };
-
-const engineer_questions = [
-  {
-    type: "input",
-    message: "Enter engineer name..",
-    name: "engineer_name",
-  },
-  {
-    type: "input",
-    message: "Enter engineer ID..",
-    name: "engineer_ID",
-  },
-  {
-    type: "input",
-    message: "Enter engineer email..",
-    name: "engineer_email",
-  },
-  {
-    type: "input",
-    message: "Enter engineer GitHub username..",
-    name: "engineer_github",
-  },
-];
-
-const intern_questions = [
-  {
-    type: "input",
-    message: "Enter intern name",
-    name: "intern_name",
-  },
-  {
-    type: "input",
-    message: "Enter intern ID",
-    name: "intern_ID",
-  },
-  {
-    type: "input",
-    message: "Enter intern email",
-    name: "intern_email",
-  },
-  {
-    type: "input",
-    message: "Enter intern school",
-    name: "intern_school",
-  },
-];
-
-const menu = [
-  {
-    type: "list",
-    choices: ["Add an engineer", "Add an intern", "Finish team"],
-    message: "Add team member or finish team?",
-    name: "add_members",
-  },
-];
 
 const createEngineer = (engineer) => {
   return `<div class="card">
@@ -120,28 +71,7 @@ const generate = function () {
 };
 
 const init = async () => {
-  const firstAnswers = await inquirer.prompt([
-    {
-      type: "input",
-      message: "Enter the team manager's name..",
-      name: "managerName",
-    },
-    {
-      type: "input",
-      message: "Team manager's employee ID..",
-      name: "managerID",
-    },
-    {
-      type: "input",
-      message: "Team manager's email address..",
-      name: "managerEmail",
-    },
-    {
-      type: "input",
-      message: "Team manager's office number..",
-      name: "managerOffice",
-    },
-  ]);
+  const firstAnswers = await inquirer.prompt(manager_questions);
 
   team.manager = {
     name: firstAnswers.managerName,
@@ -178,12 +108,3 @@ const init = async () => {
   generate();
 };
 init();
-
-// for (let i = 0; i < team.engineers.length; i++) {
-//   return {
-//     name: engineers[i].name,
-//     id: engineers[i].id,
-//     email: engineers[i].email,
-//     github: engineers[i].github,
-//   };
-// }
